@@ -5,16 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
+<body class="h-14 bg-gradient-to-r from-sky-500 to-indigo-500">
+    
+    <header>
+        <h1 class="text-center mt-6 text-3xl text-slate-50">Compartive Media Search!</h1>
+    </header>
     <main>
-    <!-- Search button-->
-    <div class="search-bar" id="search-bar">Search (PH)</div>
-    <!-- Button to select random book -->
-    <div class="go-button" id="go-button">Random (PH)</div>
-    <!-- Modal -->
-    <button class="item-modal" id="item-modal">Modal (PH)</button>
-    </main>
+    
+    
+        <!-- Search button-->
+    <form class="items-center max-w-sm flex  justify-center">
+        <div class="mb-6">
+            <div class="flex items-center max-w-md mx-auto rounded border-0 p-3">
+                <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Enter Keywords</label>
+                <input type="text" id="keywords" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Keywords" required>
+            </div>
+        </div>
+    </form> 
+
+
+    <!-- Modal STILL NEEDS WORK BUT THE BUTTON IS HERE-->
+    <div class="md:flex md:justify-center mb-6">
+    <button type="button" data-modal-toggle="defaultModal" class="flex items-center justify-center py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Generate Results</button>
+    </div>
+    
+    
+
+</main>
     
 </body>
 </html>
