@@ -4,7 +4,12 @@ var apiKey = '441347-MonthlyM-17PWWN2S';
 
 // get media and content from TasteDive API
 function getMedia(userSearch) {
-    var apiUrl = "https://tastedive.com/api/similar?info=1&q=Thor: Ragnarok&k=" + apiKey;
+  // TODO:: Uncomment when using userSearch 
+  //  userSearch = userSearch.toLowerCase();
+  var apiUrl = "https://tastedive.com/api/similar?info=1&q=Thor: Ragnarok&k=" + apiKey;
+
+  // replace ^^^^^ above APIurl with one below to in coporate the userSearch
+  // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey;
     
     console.log(apiUrl);
     // fetch(apiUrl, {
@@ -22,7 +27,32 @@ function getMedia(userSearch) {
         response.json().then(function (data) {
           console.log(data);
           
-             
+          // SAVE to localStorage
+          var searchsaved = JSON.parse(localStorage.getItem('User_Search')); // getItem from localStorage
+          if (!searchsaved) {
+            searchsaved = [];
+          }
+
+          // object format for user Searches 
+              // var searchObj = {
+              //     searchedFor: ""
+              // }
+          var searchFalse = false;
+          searchsaved.forEach(function (random) {
+            var searchBar  = random.searchsaved;
+              if (searchBar === userSearch)
+                  searchFalse = true;
+          });
+
+          if (!searchFalse) {
+            // ADD to localStorage
+            searchsaved.push({
+              searchedFor: userSearch,
+            });
+
+          }
+            // setItem to localStorage
+             localStorage.setItem("User_Search", JSON.stringify(searchsaved));
         });
       }
     })
