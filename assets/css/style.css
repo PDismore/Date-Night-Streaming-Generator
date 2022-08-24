@@ -603,6 +603,10 @@ video {
   display: block;
 }
 
+.hidden {
+  display: none;
+}
+
 .flex {
   display: flex;
 }
@@ -719,6 +723,10 @@ video {
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-end {
+  justify-content: end;
 }
 
 .justify-between {
