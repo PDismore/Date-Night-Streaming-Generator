@@ -1,16 +1,16 @@
- feature/get-api
 
 // global variables 
-var apiKey = '441347-MonthlyM-17PWWN2S';
+var apiKey1 = '441347-MonthlyM-17PWWN2S';
+var apiKey2 = 'vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi'
 
 // get media and content from TasteDive API
 function getMedia(userSearch) {
   // TODO:: Uncomment when using userSearch 
   //  userSearch = userSearch.toLowerCase();
-  var apiUrl = "https://tastedive.com/api/similar?info=1&q=Thor: Ragnarok&k=" + apiKey;
+  var apiUrl = "https://tastedive.com/api/similar?info=1&q=Thor: Ragnarok&k=" + apiKey1;
 
   // replace ^^^^^ above APIurl with one below to in coporate the userSearch
-  // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey;
+  // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey1;
     
     console.log(apiUrl);
     // fetch(apiUrl, {
@@ -59,41 +59,50 @@ function getMedia(userSearch) {
     })
   }
 
+//   WatchMode API
+
+
+var apiUrl = 'https://api.watchmode.com/v1/title/345534/sources/?apiKey=vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi';
+
+fetch(apiUrl, { method: 'Get' })
+    .then((res) => res.json())
+    .then((json) => {
+        console.log(json);
+    });
 
 
 
-// Search Button click
-$('#go-button').on('click', function (event) {
-    //prevent page refresh
-    event.preventDefault();
+// // Search Button click
+// $('#go-button').on('click', function (event) {
+//     //prevent page refresh
+//     event.preventDefault();
 
-    // if statement to check if string value was inputed into the search bar, if not return user searched information
-    if ($('#search-bar').val() === "") {
-        alert("Nothing was typed in the search. Please enter a valid search!");
-    } else {
-        var userSearch = $('#search-bar').val().trim().toLowerCase();
-        console.log(userSearch);
-        $('#search-bar').val("");
-    }
-})
-getMedia();
+//     // if statement to check if string value was inputed into the search bar, if not return user searched information
+//     if ($('#search-bar').val() === "") {
+//         alert("Nothing was typed in the search. Please enter a valid search!");
+//     } else {
+//         var userSearch = $('#search-bar').val().trim().toLowerCase();
+//         console.log(userSearch);
+//         $('#search-bar').val("");
+//     }
+// })
+// getMedia();
 
 
 
-window.addEventListener
-    ('DOMContentLoaded', () =>{
-        const overlay = document.querySelector ('#overlay')
-        const keysub = document.querySelector ('#key-sub')
-        const modclose = document.querySelector ('#close-modal')
+// window.addEventListener
+//     ('DOMContentLoaded', () =>{
+//         const overlay = document.querySelector ('#overlay')
+//         const keysub = document.querySelector ('#key-sub')
+//         const modclose = document.querySelector ('#close-modal')
 
-        keysub.addEventListener("click", function() {
-            overlay.classList.remove('hidden')
-            overlay.classList.add('flex')
-        })
-        modclose.addEventListener("click", function() {
-            overlay.classList.add('hidden')
-            overlay.classList.remove('flex')
-        })
+//         keysub.addEventListener("click", function() {
+//             overlay.classList.remove('hidden')
+//             overlay.classList.add('flex')
+//         })
+//         modclose.addEventListener("click", function() {
+//             overlay.classList.add('hidden')
+//             overlay.classList.remove('flex')
+//         })
         
-    })
-develop
+//     })
