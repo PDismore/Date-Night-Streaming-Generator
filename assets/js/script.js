@@ -1,5 +1,3 @@
- feature/get-api
-
 // global variables 
 var apiKey = '441347-MonthlyM-17PWWN2S';
 
@@ -7,7 +5,7 @@ var apiKey = '441347-MonthlyM-17PWWN2S';
 function getMedia(userSearch) {
   // TODO:: Uncomment when using userSearch 
   //  userSearch = userSearch.toLowerCase();
-  var apiUrl = "https://tastedive.com/api/similar?info=1&q=Thor: Ragnarok&k=" + apiKey;
+  var apiUrl = "https://imdb-api.com/en/API/Search/k_12345678/inception 2010";
 
   // replace ^^^^^ above APIurl with one below to in coporate the userSearch
   // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey;
@@ -21,7 +19,7 @@ function getMedia(userSearch) {
     //     'Access-Control-Allow-Credentials': true    
     //   }
     // })
-    fetch("http://cors-anywhere.herokuapp.com/" + apiUrl)
+    fetch(apiUrl)
     .then(function (response) {
       // if request was successful
       if (response.ok) {
@@ -96,4 +94,3 @@ window.addEventListener
         })
         
     })
-develop
