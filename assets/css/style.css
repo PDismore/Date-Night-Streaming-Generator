@@ -602,7 +602,16 @@ video {
 .block {
   display: block;
 }
+.hidden {
+  display: none;
+}
 
+.inline-block {
+  display: inline-block;
+}
+.inline{
+  display: inline;
+}
 .flex {
   display: flex;
 }
@@ -622,9 +631,11 @@ video {
 .h-6 {
   height: 1.5rem;
 }
-
+.w-screen {
+  width: 100vw;
+}
 .h-screen {
-  height: 100vh;
+  height: 50vh;
 }
 
 .h-14 {
@@ -669,6 +680,14 @@ video {
 
 .flex-grow-0 {
   flex-grow: 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.child {
+  flex-grow: 1;
 }
 
 .translate-y-4 {
