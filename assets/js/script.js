@@ -1,5 +1,5 @@
 // global variables 
-var apiKey = '441347-MonthlyM-17PWWN2S';
+var apiKey = 'k_m6r8p68f';
 
 // get media and content from TasteDive API
 function getMedia(userSearch) {
@@ -46,12 +46,21 @@ function getMedia(userSearch) {
           }
             // setItem to localStorage
              localStorage.setItem("User_Search", JSON.stringify(searchsaved));
-        });
-      }
-    })
+             return fetch(`https://imdb-api.com/en/API/Trailer/k_m6r8p68f/${data.results[0].id}`)
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data);
+          })
+
+      };
+    });
   }
 
 
+  // display main movie content for modal
 function displayContent (userSearch) {
   // get current movie
   var movieName = userSearch.results[0].title;
@@ -65,11 +74,20 @@ function displayContent (userSearch) {
   var movieID = userSearch.results[0].id;
   console.log(movieID);
 
-  //get current movie's ID
+  //get current movie's cover
   var movieCover = userSearch.results[0].image;
   console.log(movieCover);
 
+  // insert Movie Title and Year 
   $('#title-id').text(movieName + " " + movieYear);
+
+  // create img tag for movieCover
+  var imgCover = $('<img>').attr('src', movieCover);
+      // imgCover class and ID
+      imgCover.attr('class', "coverStyle");
+      imgCover.attr('id', 'cover');
+      //append Movie cover
+      $('#img-cover').append(imgCover);
 }
 
 
