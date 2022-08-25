@@ -5,20 +5,14 @@ var apiKey = '441347-MonthlyM-17PWWN2S';
 function getMedia(userSearch) {
   // TODO:: Uncomment when using userSearch 
   //  userSearch = userSearch.toLowerCase();
-  var apiUrl = "https://imdb-api.com/en/API/Search/k_12345678/inception 2010";
+  var apiUrl = "https://imdb-api.com/en/API/Search/k_m6r8p68f/" + userSearch;
+  console.log(userSearch);
 
   // replace ^^^^^ above APIurl with one below to in coporate the userSearch
   // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey;
     
     console.log(apiUrl);
-    // fetch(apiUrl, {
-    //   mode: 'cors',
-    //   headers: {
-    //     'Access-Control-Allow-Origin':'*',
-    //     // 'Access-Control-Allow-Origin':' https://tastedive.com/api/similar?info=1&q=Thor:Ragnarok&k=441347-MonthlyM-17PWWN2S' ,
-    //     'Access-Control-Allow-Credentials': true    
-    //   }
-    // })
+   
     fetch(apiUrl)
     .then(function (response) {
       // if request was successful
@@ -61,20 +55,21 @@ function getMedia(userSearch) {
 
 
 // Search Button click
-$('#go-button').on('click', function (event) {
+$('#key-sub').on('click', function (event) {
     //prevent page refresh
     event.preventDefault();
 
     // if statement to check if string value was inputed into the search bar, if not return user searched information
-    if ($('#search-bar').val() === "") {
+    if ($('#keywords').val() === "") {
         alert("Nothing was typed in the search. Please enter a valid search!");
     } else {
-        var userSearch = $('#search-bar').val().trim().toLowerCase();
+        var userSearch = $('#keywords').val().trim().toLowerCase();
         console.log(userSearch);
-        $('#search-bar').val("");
+        getMedia(userSearch);
+        $('#keywords').val("");
     }
 })
-getMedia();
+
 
 
 
