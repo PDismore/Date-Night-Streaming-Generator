@@ -3,72 +3,81 @@
 var apiKey1 = '441347-MonthlyM-17PWWN2S';
 var apiKey2 = 'vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi'
 
-// get media and content from TasteDive API
-function getMedia(userSearch) {
-  // TODO:: Uncomment when using userSearch 
-  //  userSearch = userSearch.toLowerCase();
-  var apiUrl = "https://tastedive.com/api/similar?info=1&q=Thor: Ragnarok&k=" + apiKey1;
+// // get media and content from TasteDive API
+// function getMedia(userSearch) {
+//   // TODO:: Uncomment when using userSearch 
+//   //  userSearch = userSearch.toLowerCase();
+//   var apiUrl = "https://tastedive.com/api/similar?info=1&q=Thor: Ragnarok&k=" + apiKey1;
 
-  // replace ^^^^^ above APIurl with one below to in coporate the userSearch
-  // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey1;
+//   // replace ^^^^^ above APIurl with one below to in coporate the userSearch
+//   // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey1;
     
-    console.log(apiUrl);
-    // fetch(apiUrl, {
-    //   mode: 'cors',
-    //   headers: {
-    //     'Access-Control-Allow-Origin':'*',
-    //     // 'Access-Control-Allow-Origin':' https://tastedive.com/api/similar?info=1&q=Thor:Ragnarok&k=441347-MonthlyM-17PWWN2S' ,
-    //     'Access-Control-Allow-Credentials': true    
-    //   }
-    // })
-    fetch("http://cors-anywhere.herokuapp.com/" + apiUrl)
-    .then(function (response) {
-      // if request was successful
-      if (response.ok) {
-        response.json().then(function (data) {
-          console.log(data);
+//     console.log(apiUrl);
+//     // fetch(apiUrl, {
+//     //   mode: 'cors',
+//     //   headers: {
+//     //     'Access-Control-Allow-Origin':'*',
+//     //     // 'Access-Control-Allow-Origin':' https://tastedive.com/api/similar?info=1&q=Thor:Ragnarok&k=441347-MonthlyM-17PWWN2S' ,
+//     //     'Access-Control-Allow-Credentials': true    
+//     //   }
+//     // })
+//     fetch("http://cors-anywhere.herokuapp.com/" + apiUrl)
+//     .then(function (response) {
+//       // if request was successful
+//       if (response.ok) {
+//         response.json().then(function (data) {
+//           console.log(data);
           
-          // SAVE to localStorage
-          var searchsaved = JSON.parse(localStorage.getItem('User_Search')); // getItem from localStorage
-          if (!searchsaved) {
-            searchsaved = [];
-          }
+//           // SAVE to localStorage
+//           var searchsaved = JSON.parse(localStorage.getItem('User_Search')); // getItem from localStorage
+//           if (!searchsaved) {
+//             searchsaved = [];
+//           }
 
-          // object format for user Searches 
-              // var searchObj = {
-              //     searchedFor: ""
-              // }
-          var searchFalse = false;
-          searchsaved.forEach(function (random) {
-            var searchBar  = random.searchsaved;
-              if (searchBar === userSearch)
-                  searchFalse = true;
-          });
+//           // object format for user Searches 
+//               // var searchObj = {
+//               //     searchedFor: ""
+//               // }
+//           var searchFalse = false;
+//           searchsaved.forEach(function (random) {
+//             var searchBar  = random.searchsaved;
+//               if (searchBar === userSearch)
+//                   searchFalse = true;
+//           });
 
-          if (!searchFalse) {
-            // ADD to localStorage
-            searchsaved.push({
-              searchedFor: userSearch,
-            });
+//           if (!searchFalse) {
+//             // ADD to localStorage
+//             searchsaved.push({
+//               searchedFor: userSearch,
+//             });
 
-          }
-            // setItem to localStorage
-             localStorage.setItem("User_Search", JSON.stringify(searchsaved));
-        });
-      }
-    })
-  }
+//           }
+//             // setItem to localStorage
+//              localStorage.setItem("User_Search", JSON.stringify(searchsaved));
+//         });
+//       }
+//     })
+//   }
 
-//   WatchMode API
+  ////WatchMode API
+//Get streaming list from WatchMode
 
 
-var apiUrl = 'https://api.watchmode.com/v1/title/345534/sources/?apiKey=vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi';
+  //Get Watchmode ID for user search NEED TO Get IMDB ID FRMO IMDB API
+  var imdbID = 'tt0285403'
+  //NEED TO UPDATE END OF URL
+  var url = 'https://api.watchmode.com/v1/title/'+imdbID+'/sources/?apiKey='+apiKey2;
+  
+  fetch(url, { method: 'Get' })
+      .then((res) => res.json())
+      .then((data) => {
+          console.log(data);
+          JSON.parse(["type:sub"])
+      });
 
-fetch(apiUrl, { method: 'Get' })
-    .then((res) => res.json())
-    .then((json) => {
-        console.log(json);
-    });
+
+//Get streaming list using Watchmode ID
+ 
 
 
 
