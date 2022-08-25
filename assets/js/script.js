@@ -19,7 +19,7 @@ function getMedia(userSearch) {
       if (response.ok) {
         response.json().then(function (data) {
           console.log(data);
-          
+          displayContent(data);
           // SAVE to localStorage
           var searchsaved = JSON.parse(localStorage.getItem('User_Search')); // getItem from localStorage
           if (!searchsaved) {
@@ -51,6 +51,26 @@ function getMedia(userSearch) {
     })
   }
 
+
+function displayContent (userSearch) {
+  // get current movie
+  var movieName = userSearch.results[0].title;
+  console.log(movieName);
+
+  //get current movie's year
+  var movieYear = userSearch.results[0].description;
+  console.log(movieYear);
+
+  //get current movie's ID
+  var movieID = userSearch.results[0].id;
+  console.log(movieID);
+
+  //get current movie's ID
+  var movieCover = userSearch.results[0].image;
+  console.log(movieCover);
+
+  $('#title-id').text(movieName + " " + movieYear);
+}
 
 
 
