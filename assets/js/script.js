@@ -78,9 +78,24 @@ var apiKey2 = 'vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi'
   
   fetch(url, { method: 'Get' })
       .then((res) => res.json())
-      .then((json) => {
-          console.log(json);
+      .then((data) => {
+          console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            var stream= data [i]
+            if (stream.type === "sub") {
+              console.log(stream.web_url,stream.name);
+              var streamLink = stream.web_url;
+              var streamName = stream.name;
+              $("#streaming").append(streamLink,streamName);
+            }
+                //also the data to add
+              else {
+              }
+            }
+           
       });
+
+ 
 //Get streaming list using Watchmode ID
  
 
