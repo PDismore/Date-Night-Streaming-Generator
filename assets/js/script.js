@@ -14,3 +14,8 @@ window.addEventListener
         })
         
     })
+
+    //Prevent enter key from submitting
+$(document).on("keydown", "form", function(event) { 
+  return event.key != "Enter";
+});
