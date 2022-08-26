@@ -97,6 +97,7 @@ function displayContent (userSearch) {
   //get current movie's ID
   var movieID = userSearch.results[0].id;
   console.log(movieID);
+  streamingContent(movieID);
 
   //get current movie's cover
   var movieCover = userSearch.results[0].image;
@@ -115,7 +116,26 @@ function displayContent (userSearch) {
       
       
 }
-
+function streamingContent (movieID){
+  let url = 'https://api.watchmode.com/v1/title/' + movieID + '/sources/?apiKey=vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi';
+  fetch(url, { method: 'Get' })
+      .then((res) => res.json())
+      .then((data) => {
+          console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            var stream= data [i]
+            if (stream.type === "sub") {
+              console.log(stream.web_url,stream.name);
+              // var streamLink = stream.web_url;
+              var streamName = stream.name;
+              $('#streaming').append(streamName);
+            }
+                //also the data to add
+              else {
+              }
+            }
+      });
+}
 
 
 // Search Button click
@@ -133,25 +153,3 @@ $('#key-sub').on('click', function (event) {
         $('#keywords').val("");
     }
 })
-
-
-
-
-
-window.addEventListener
-    ('DOMContentLoaded', () =>{
-        const overlay = document.querySelector ('#overlay')
-        const keysub = document.querySelector ('#key-sub')
-        const modclose = document.querySelector ('#close-modal')
-
-        keysub.addEventListener("click", function() {
-            overlay.classList.remove('hidden')
-            overlay.classList.add('flex')
-        })
-        modclose.addEventListener("click", function() {
-            overlay.classList.add('hidden')
-            overlay.classList.remove('flex')
-        })
-        
-
-    })
