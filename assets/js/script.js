@@ -63,18 +63,24 @@ var apiKey2 = 'vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi'
 //Get streaming list from WatchMode
 
 
-  //Get Watchmode ID for user search NEED TO Get IMDB ID FRMO IMDB API
-  var imdbID = 'tt0285403'
-  //NEED TO UPDATE END OF URL
-  var url = 'https://api.watchmode.com/v1/title/'+imdbID+'/source_types=sub/?apiKey='+apiKey2;
+  // //Get Watchmode ID for user search NEED TO Get IMDB ID FRMO IMDB API
+  // var imdbID = 'tt0285403'
+  // //NEED TO UPDATE END OF URL
+  // var url = 'https://api.watchmode.com/v1/title/'+imdbID+'/source_types=sub/?apiKey='+apiKey2;
+  
+  // fetch(url, { method: 'Get' })
+  // .then((res) => res.json())
+  // .then((json) => {
+  //     console.log(json);
+  // });
+
+  let url = 'https://api.watchmode.com/v1/title/tt0285403/sources/?apiKey=vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi';
   
   fetch(url, { method: 'Get' })
-  .then((res) => res.json())
-  .then((json) => {
-      console.log(json);
-  });
-
-
+      .then((res) => res.json())
+      .then((json) => {
+          console.log(json);
+      });
 //Get streaming list using Watchmode ID
  
 
