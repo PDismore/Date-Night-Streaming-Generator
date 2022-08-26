@@ -66,14 +66,13 @@ var apiKey2 = 'vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi'
   //Get Watchmode ID for user search NEED TO Get IMDB ID FRMO IMDB API
   var imdbID = 'tt0285403'
   //NEED TO UPDATE END OF URL
-  var url = 'https://api.watchmode.com/v1/title/'+imdbID+'/sources/?apiKey='+apiKey2;
+  var url = 'https://api.watchmode.com/v1/title/'+imdbID+'/source_types=sub/?apiKey='+apiKey2;
   
   fetch(url, { method: 'Get' })
-      .then((res) => res.json())
-      .then((data) => {
-          console.log(data);
-          JSON.parse(["type:sub"])
-      });
+  .then((res) => res.json())
+  .then((json) => {
+      console.log(json);
+  });
 
 
 //Get streaming list using Watchmode ID
