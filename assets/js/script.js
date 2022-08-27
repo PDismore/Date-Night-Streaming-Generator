@@ -1,81 +1,123 @@
+window.addEventListener
+    ('DOMContentLoaded', () =>{
+        const overlay = document.querySelector ('#overlay')
+        const keysub = document.querySelector ('#key-sub')
+        const modclose = document.querySelector ('#close-modal')
+
+        keysub.addEventListener("click", function() {
+            overlay.classList.remove('hidden')
+            overlay.classList.add('flex')
+        })
+        modclose.addEventListener("click", function() {
+            overlay.classList.add('hidden')
+            overlay.classList.remove('flex')
+        })
+        
+    })
+
+    //Prevent enter key from submitting
+$(document).on("keydown", "form", function(event) { 
+  return event.key != "Enter";
+});
 
 // global variables 
-var apiKey1 = '441347-MonthlyM-17PWWN2S';
-var apiKey2 = 'vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi'
+var apiKey = 'k_m6r8p68f';
 
-// // get media and content from TasteDive API
-// function getMedia(userSearch) {
-//   // TODO:: Uncomment when using userSearch 
-//   //  userSearch = userSearch.toLowerCase();
-//   var apiUrl = "https://tastedive.com/api/similar?info=1&q=Thor: Ragnarok&k=" + apiKey1;
+// get media and content from TasteDive API
+function getMedia(userSearch) {
+  // TODO:: Uncomment when using userSearch 
+  //  userSearch = userSearch.toLowerCase();
+  var apiUrl = "https://imdb-api.com/en/API/Search/k_m6r8p68f/" + userSearch;
+  console.log(userSearch);
 
-//   // replace ^^^^^ above APIurl with one below to in coporate the userSearch
-//   // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey1;
+  // replace ^^^^^ above APIurl with one below to in coporate the userSearch
+  // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey;
     
-//     console.log(apiUrl);
-//     // fetch(apiUrl, {
-//     //   mode: 'cors',
-//     //   headers: {
-//     //     'Access-Control-Allow-Origin':'*',
-//     //     // 'Access-Control-Allow-Origin':' https://tastedive.com/api/similar?info=1&q=Thor:Ragnarok&k=441347-MonthlyM-17PWWN2S' ,
-//     //     'Access-Control-Allow-Credentials': true    
-//     //   }
-//     // })
-//     fetch("http://cors-anywhere.herokuapp.com/" + apiUrl)
-//     .then(function (response) {
-//       // if request was successful
-//       if (response.ok) {
-//         response.json().then(function (data) {
-//           console.log(data);
+    console.log(apiUrl);
+   
+    fetch(apiUrl)
+    .then(function (response) {
+      // if request was successful
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+
+          displayContent(data);
           
-//           // SAVE to localStorage
-//           var searchsaved = JSON.parse(localStorage.getItem('User_Search')); // getItem from localStorage
-//           if (!searchsaved) {
-//             searchsaved = [];
-//           }
+          // SAVE to localStorage
+          var searchsaved = JSON.parse(localStorage.getItem('User_Search')); // getItem from localStorage
+          if (!searchsaved) {
+            searchsaved = [];
+          }
 
-//           // object format for user Searches 
-//               // var searchObj = {
-//               //     searchedFor: ""
-//               // }
-//           var searchFalse = false;
-//           searchsaved.forEach(function (random) {
-//             var searchBar  = random.searchsaved;
-//               if (searchBar === userSearch)
-//                   searchFalse = true;
-//           });
+          // object format for user Searches 
+              // var searchObj = {
+              //     searchedFor: ""
+              // }
+          var searchFalse = false;
+          searchsaved.forEach(function (random) {
+            var searchBar  = random.searchsaved;
+              if (searchBar === userSearch)
+                  searchFalse = true;
+          });
 
-//           if (!searchFalse) {
-//             // ADD to localStorage
-//             searchsaved.push({
-//               searchedFor: userSearch,
-//             });
+          if (!searchFalse) {
+            // ADD to localStorage
+            searchsaved.push({
+              searchedFor: userSearch,
+            });
 
-//           }
-//             // setItem to localStorage
-//              localStorage.setItem("User_Search", JSON.stringify(searchsaved));
-//         });
-//       }
-//     })
-//   }
+          }
+            // setItem to localStorage
+             localStorage.setItem("User_Search", JSON.stringify(searchsaved));
+             return fetch(`https://imdb-api.com/en/API/Trailer/k_m6r8p68f/${data.results[0].id}`)
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data);
+          })
 
-  ////WatchMode API
-//Get streaming list from WatchMode
+      };
+    });
+  }
 
 
-  // //Get Watchmode ID for user search NEED TO Get IMDB ID FRMO IMDB API
-  // var imdbID = 'tt0285403'
-  // //NEED TO UPDATE END OF URL
-  // var url = 'https://api.watchmode.com/v1/title/'+imdbID+'/source_types=sub/?apiKey='+apiKey2;
-  
-  // fetch(url, { method: 'Get' })
-  // .then((res) => res.json())
-  // .then((json) => {
-  //     console.log(json);
-  // });
+  // display main movie content for modal
+function displayContent (userSearch) {
+  // get current movie
+  var movieName = userSearch.results[0].title;
+  console.log(movieName);
 
-  let url = 'https://api.watchmode.com/v1/title/tt0285403/sources/?apiKey=vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi';
-  
+  //get current movie's year
+  var movieYear = userSearch.results[0].description;
+  console.log(movieYear);
+
+  //get current movie's ID
+  var movieID = userSearch.results[0].id;
+  console.log(movieID);
+  streamingContent(movieID);
+
+  //get current movie's cover
+  var movieCover = userSearch.results[0].image;
+  console.log(movieCover);
+
+  // insert Movie Title and Year 
+  $('#media-title').text(movieName + " " + movieYear);
+
+  // create img tag for movieCover
+  var imgCover = $('<img>').attr('src', movieCover);
+      // imgCover class and ID
+      imgCover.attr('class', "coverStyle");
+      imgCover.attr('id', 'cover');
+      //append Movie cover
+      $('#cover').append(imgCover);
+      
+      
+}
+function streamingContent (movieID){
+  let url = 'https://api.watchmode.com/v1/title/' + movieID + '/sources/?apiKey=vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi';
   fetch(url, { method: 'Get' })
       .then((res) => res.json())
       .then((data) => {
@@ -84,54 +126,30 @@ var apiKey2 = 'vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi'
             var stream= data [i]
             if (stream.type === "sub") {
               console.log(stream.web_url,stream.name);
-              var streamLink = stream.web_url;
+              // var streamLink = stream.web_url;
               var streamName = stream.name;
-              $("#streaming").append(streamLink,streamName);
+              $('#streaming').append(streamName);
             }
                 //also the data to add
               else {
               }
             }
-           
       });
-
- 
-//Get streaming list using Watchmode ID
- 
+}
 
 
+// Search Button click
+$('#key-sub').on('click', function (event) {
+    //prevent page refresh
+    event.preventDefault();
 
-// // Search Button click
-// $('#go-button').on('click', function (event) {
-//     //prevent page refresh
-//     event.preventDefault();
-
-//     // if statement to check if string value was inputed into the search bar, if not return user searched information
-//     if ($('#search-bar').val() === "") {
-//         alert("Nothing was typed in the search. Please enter a valid search!");
-//     } else {
-//         var userSearch = $('#search-bar').val().trim().toLowerCase();
-//         console.log(userSearch);
-//         $('#search-bar').val("");
-//     }
-// })
-// getMedia();
-
-
-
-// window.addEventListener
-//     ('DOMContentLoaded', () =>{
-//         const overlay = document.querySelector ('#overlay')
-//         const keysub = document.querySelector ('#key-sub')
-//         const modclose = document.querySelector ('#close-modal')
-
-//         keysub.addEventListener("click", function() {
-//             overlay.classList.remove('hidden')
-//             overlay.classList.add('flex')
-//         })
-//         modclose.addEventListener("click", function() {
-//             overlay.classList.add('hidden')
-//             overlay.classList.remove('flex')
-//         })
-        
-//     })
+    // if statement to check if string value was inputed into the search bar, if not return user searched information
+    if ($('#keywords').val() === "") {
+        alert("Nothing was typed in the search. Please enter a valid search!");
+    } else {
+        var userSearch = $('#keywords').val().trim().toLowerCase();
+        console.log(userSearch);
+        getMedia(userSearch);
+        $('#keywords').val("");
+    }
+})
