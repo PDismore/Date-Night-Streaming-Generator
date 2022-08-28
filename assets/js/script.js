@@ -86,6 +86,7 @@ function getMedia(userSearch) {
 
   // display main movie content for modal
 function displayContent (userSearch) {
+  $('#cover').empty();
   // get current movie
   var movieName = userSearch.results[0].title;
   console.log(movieName);
@@ -122,6 +123,7 @@ function streamingContent (movieID){
       .then((res) => res.json())
       .then((data) => {
           console.log(data);
+          $('#streaming').empty();
           for (let i = 0; i < data.length; i++) {
             var stream= data [i]
             if (stream.type === "sub") {
