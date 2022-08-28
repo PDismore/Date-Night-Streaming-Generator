@@ -115,8 +115,7 @@ function displayContent (userSearch) {
       //append Movie cover
       $('#cover').append(imgCover);
       
-
-// API 2, Streaming avalibility
+      
 }
 function streamingContent (movieID){
   let url = 'https://api.watchmode.com/v1/title/' + movieID + '/sources/?apiKey=vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi';
