@@ -128,9 +128,12 @@ function streamingContent (movieID){
             var stream= data [i]
             if (stream.type === "sub") {
               console.log(stream.web_url,stream.name);
-              // var streamLink = stream.web_url;
+              var streamLink = stream.web_url;
               var streamName = stream.name;
-              $('#streaming').append(streamName);
+              // var link =$("<a>").attr("href",streamLink);
+              // $('#streaming').append(streamName);
+              $('<a href="'+streamLink+'">'+streamName+'</a>').appendTo($('#streaming'));
+              
             }
                 //also the data to add
               else {
