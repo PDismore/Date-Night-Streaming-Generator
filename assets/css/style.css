@@ -569,7 +569,9 @@ video {
 .z-10 {
   z-index: 10;
 }
-
+.z-99 {
+  z-index: 99;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -690,7 +692,9 @@ video {
   display: flex;
   flex-direction: column;
 }
-
+.object-contian {
+  object-fit: contain;
+}
 .child {
   flex-grow: 1;
 }

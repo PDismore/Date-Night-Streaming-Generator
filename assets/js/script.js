@@ -63,9 +63,9 @@ function getMedia(userSearch) {
 
           if (!searchFalse) {
             // ADD to localStorage
-            searchsaved.push({
-              searchedFor: userSearch,
-            });
+            searchsaved.push(
+            userSearch
+            );
 
           }
             // setItem to localStorage
@@ -86,6 +86,7 @@ function getMedia(userSearch) {
 
   // display main movie content for modal
 function displayContent (userSearch) {
+  $('#cover').empty();
   // get current movie
   var movieName = userSearch.results[0].title;
   console.log(movieName);
@@ -114,29 +115,58 @@ function displayContent (userSearch) {
       //append Movie cover
       $('#cover').append(imgCover);
       
-
-// API 2, Streaming avalibility
+      
 }
+//Watchmode API (streaming services and links)
 function streamingContent (movieID){
   let url = 'https://api.watchmode.com/v1/title/' + movieID + '/sources/?apiKey=vGUD649BOe5lJriuaPDdaEglhvqumY4fgroqSfsi';
   fetch(url, { method: 'Get' })
       .then((res) => res.json())
       .then((data) => {
           console.log(data);
+          $('#streaming').empty();
           for (let i = 0; i < data.length; i++) {
             var stream= data [i]
             if (stream.type === "sub") {
               console.log(stream.web_url,stream.name);
-              // var streamLink = stream.web_url;
+              var streamLink = stream.web_url;
               var streamName = stream.name;
-              $('#streaming').append(streamName);
+              // var link =$("<a>").attr("href",streamLink);
+              // $('#streaming').append(streamName);
+              $('<a href="'+streamLink+'">'+streamName+'</a>').appendTo($('#streaming'));
+              
             }
                 //also the data to add
               else {
               }
             }
       });
-}
+} 
+
+// //Previous Search Button
+// $('#prevResult').on('click',function(event, userSearch){
+//   event.preventDefault();
+  
+//   const previous = JSON.parse(localStorage.getItem('User_Search'))
+//   var userSearch = previous
+//   // if (previous==null)
+//   // {return null;}
+//   // console.log(previous)
+//   for (let i = 0; i < previous.length; i++){
+//     var prevLength = previous.length -2;
+//     console.log(prevLength)
+//   if (previous == null) {
+//     // console.log(previous[i].userSearch);
+//     return null;
+//   }
+//   else {
+//     console.log(previous[i]);
+//     // displayContent(userSearch);
+//     // streamingContent();
+//   }
+// }
+// });
+
 
 
 // Search Button click
