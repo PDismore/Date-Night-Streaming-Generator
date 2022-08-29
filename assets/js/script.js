@@ -168,6 +168,26 @@ function streamingContent (movieID){
 // }
 // });
 
+$('#prevResult').on('click', function (event) {
+  event.preventDefault();
+  
+  var previous = JSON.parse(localStorage.getItem('User_Search'))
+  if (previous == null) {
+    // console.log(previous);
+    return null
+  }
+    // for (let i = 0; i < previous.length ; i++){
+      
+      // var prevLength = previous.slice(-1).pop();
+     var prevLength =  previous.length - 2;
+       console.log(previous[prevLength]);
+    
+    getMedia(previous[prevLength]);
+    streamingContent();
+        
+    
+      // } 
+    });
 
 
 // Search Button click
