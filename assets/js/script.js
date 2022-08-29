@@ -20,14 +20,11 @@ $(document).on("keydown", "form", function(event) {
   return event.key != "Enter";
 });
 
-// global variables 
-var apiKey = 'k_m6r8p68f';
-
 // get media and content from TasteDive API
 function getMedia(userSearch) {
   // TODO:: Uncomment when using userSearch 
   //  userSearch = userSearch.toLowerCase();
-  var apiUrl = "https://imdb-api.com/en/API/Search/k_m6r8p68f/" + userSearch;
+  var apiUrl = "https://imdb-api.com/en/API/Search/k_dsgwgdpk/" + userSearch;
   console.log(userSearch);
 
   // replace ^^^^^ above APIurl with one below to in coporate the userSearch
@@ -133,7 +130,11 @@ function streamingContent (movieID){
               var streamName = stream.name;
               // var link =$("<a>").attr("href",streamLink);
               // $('#streaming').append(streamName);
-              $('<a href="'+streamLink+'">'+streamName+'</a>').appendTo($('#streaming'));
+              if (i !== data.length-1) {
+                streamName += " | ";
+              }
+              $('<a href="'+streamLink+'">'+streamName+ '</a>').appendTo($('#streaming'));
+              
               
             }
                 //also the data to add
