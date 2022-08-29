@@ -22,12 +22,15 @@ $(document).on("keydown", "form", function(event) {
 
 // global variables 
 var apiKey = 'k_m6r8p68f';
+var apiKey2 = 'k_6di2xd71';
 
 // get media and content from TasteDive API
 function getMedia(userSearch) {
   // TODO:: Uncomment when using userSearch 
   //  userSearch = userSearch.toLowerCase();
-  var apiUrl = "https://imdb-api.com/en/API/Search/k_m6r8p68f/" + userSearch;
+  var apiUrl = "https://imdb-api.com/en/API/Search/k_fgf9zctq/" + userSearch;
+  
+  // var apiUrl = "https://imdb-api.com/en/API/Search/k_m6r8p68f/" + userSearch;
   console.log(userSearch);
 
   // replace ^^^^^ above APIurl with one below to in coporate the userSearch
@@ -70,7 +73,9 @@ function getMedia(userSearch) {
           }
             // setItem to localStorage
              localStorage.setItem("User_Search", JSON.stringify(searchsaved));
-             return fetch(`https://imdb-api.com/en/API/Trailer/k_m6r8p68f/${data.results[0].id}`)
+            
+            //  previousResult(searchsaved);
+             return fetch(`https://imdb-api.com/en/API/Trailer/k_fgf9zctq/${data.results[0].id}`)
         })
           .then(function (response) {
             return response.json();
@@ -136,35 +141,57 @@ function streamingContent (movieID){
               $('<a href="'+streamLink+'">'+streamName+'</a>').appendTo($('#streaming'));
               
             }
-                //also the data to add
-              else {
-              }
+               
             }
       });
 } 
 
 //Previous Search Button
-$('#prevResult').on('click',function(event, userSearch){
+// $('#prevResult').on('click',function(event, userSearch){
+//   event.preventDefault();
+//   const previous = JSON.parse(localStorage.getItem('User_Search'))
+//   var userSearch = previous
+//   // if (previous==null)
+//   // {return null;}
+//   // console.log(previous)
+//   for (let i = 0; i < previous.length; i++){
+//     var prevLength = previous.length -2;
+//     console.log(prevLength)
+//   if (previous == null) {
+//     // console.log(previous[i].userSearch);
+//     return null;
+//   }
+//   else {
+//     console.log(previous[i]);
+//     // displayContent(userSearch);
+//     // streamingContent();
+//   }
+// }
+// });
+
+
+
+$('#prevResult').on('click', function (event) {
   event.preventDefault();
-  const previous = JSON.parse(localStorage.getItem('User_Search'))
-  var userSearch = previous
-  // if (previous==null)
-  // {return null;}
-  // console.log(previous)
-  for (let i = 0; i < previous.length; i++){
-    var prevLength = previous.length -2;
-    console.log(prevLength)
+  
+  var previous = JSON.parse(localStorage.getItem('User_Search'))
   if (previous == null) {
-    // console.log(previous[i].userSearch);
-    return null;
+    // console.log(previous);
+    return null
   }
-  else {
-    console.log(previous[i]);
-    // displayContent(userSearch);
-    // streamingContent();
-  }
-}
-});
+    // for (let i = 0; i < previous.length ; i++){
+      
+      // var prevLength = previous.slice(-1).pop();
+     var prevLength =  previous.length - 2;
+       console.log(previous[prevLength]);
+    
+    getMedia(previous[prevLength]);
+    streamingContent();
+        
+    
+      // } 
+    });
+
 
 
 
@@ -184,3 +211,5 @@ $('#key-sub').on('click', function (event) {
     }
 })
 
+
+// previousResult();
