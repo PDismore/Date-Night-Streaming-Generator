@@ -25,7 +25,7 @@ This was accomplished with use of JS, Jquery, styled with Tailwind, and the comb
 
 ## Visuals
 
-![Portfolio Site](./Assets/images/ezgif.com-gif-maker.gif)
+![Live Site](./assets/images/ezgif.com-gif-maker.gif)
 
 ## Authors and Acknowledgments
 
