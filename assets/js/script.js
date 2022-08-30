@@ -16,9 +16,9 @@ window.addEventListener
     })
 
     //Prevent enter key from submitting
-// $(document).on("keydown", "form", function(event) { 
-//   return event.key != "Enter";
-// });
+$(document).on("keydown", "form", function(event) { 
+  return event.key != "Enter";
+});
 
 // get media and content from TasteDive API
 function getMedia(userSearch) {
