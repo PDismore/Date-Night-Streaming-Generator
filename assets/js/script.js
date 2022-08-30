@@ -16,21 +16,14 @@ window.addEventListener
     })
 
     //Prevent enter key from submitting
-$(document).on("keydown", "form", function(event) { 
-  return event.key != "Enter";
-});
+// $(document).on("keydown", "form", function(event) { 
+//   return event.key != "Enter";
+// });
 
 // get media and content from TasteDive API
 function getMedia(userSearch) {
-  // TODO:: Uncomment when using userSearch 
-  //  userSearch = userSearch.toLowerCase();
+//IMDB API URL
   var apiUrl = "https://imdb-api.com/en/API/Search/k_dsgwgdpk/" + userSearch;
-  console.log(userSearch);
-
-  // replace ^^^^^ above APIurl with one below to in coporate the userSearch
-  // var apiUrl = "https://tastedive.com/api/similar?info=1&q=" + userSearch + "&k=" + apiKey;
-    
-    console.log(apiUrl);
    
     fetch(apiUrl)
     .then(function (response) {
@@ -47,10 +40,6 @@ function getMedia(userSearch) {
             searchsaved = [];
           }
 
-          // object format for user Searches 
-              // var searchObj = {
-              //     searchedFor: ""
-              // }
           var searchFalse = false;
           searchsaved.forEach(function (random) {
             var searchBar  = random.searchsaved;
@@ -86,20 +75,18 @@ function displayContent (userSearch) {
   $('#cover').empty();
   // get current movie
   var movieName = userSearch.results[0].title;
-  console.log(movieName);
+  
 
   //get current movie's year
   var movieYear = userSearch.results[0].description;
-  console.log(movieYear);
+ 
 
   //get current movie's ID
   var movieID = userSearch.results[0].id;
-  console.log(movieID);
   streamingContent(movieID);
 
   //get current movie's cover
   var movieCover = userSearch.results[0].image;
-  console.log(movieCover);
 
   // insert Movie Title and Year 
   $('#media-title').text(movieName + " " + movieYear);
@@ -122,71 +109,35 @@ function streamingContent (movieID){
       .then((data) => {
           console.log(data);
           $('#streaming').empty();
+          //For loop looking for arrays that have a stream type of sub
           for (let i = 0; i < data.length; i++) {
             var stream= data [i]
+          // Pulls the streaming service name and URL
             if (stream.type === "sub") {
               console.log(stream.web_url,stream.name);
               var streamLink = stream.web_url;
               var streamName = stream.name;
-              // var link =$("<a>").attr("href",streamLink);
-              // $('#streaming').append(streamName);
               if (i !== data.length-1) {
                 streamName += " | ";
               }
               $('<a href="'+streamLink+'">'+streamName+ '</a>').appendTo($('#streaming'));
-              
-              
             }
-                //also the data to add
-              else {
-              }
             }
       });
 } 
-
-// //Previous Search Button
-// $('#prevResult').on('click',function(event, userSearch){
-//   event.preventDefault();
-  
-//   const previous = JSON.parse(localStorage.getItem('User_Search'))
-//   var userSearch = previous
-//   // if (previous==null)
-//   // {return null;}
-//   // console.log(previous)
-//   for (let i = 0; i < previous.length; i++){
-//     var prevLength = previous.length -2;
-//     console.log(prevLength)
-//   if (previous == null) {
-//     // console.log(previous[i].userSearch);
-//     return null;
-//   }
-//   else {
-//     console.log(previous[i]);
-//     // displayContent(userSearch);
-//     // streamingContent();
-//   }
-// }
-// });
-
+//Previous results button
 $('#prevResult').on('click', function (event) {
   event.preventDefault();
-  
+  //Pulling from local storage
   var previous = JSON.parse(localStorage.getItem('User_Search'))
   if (previous == null) {
-    // console.log(previous);
     return null
   }
-    // for (let i = 0; i < previous.length ; i++){
-      
-      // var prevLength = previous.slice(-1).pop();
+  //Applying local storage data to search bar
      var prevLength =  previous.length - 2;
        console.log(previous[prevLength]);
-    
     getMedia(previous[prevLength]);
     streamingContent();
-        
-    
-      // } 
     });
 
 
